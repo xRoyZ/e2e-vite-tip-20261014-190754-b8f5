@@ -65,7 +65,10 @@ export default function TipForm() {
                 value={input[field.name]}
                 aria-invalid={showError}
                 aria-describedby={showError ? errorId : undefined}
-                onChange={(event) => setField(field.name, event.target.value)}
+                onChange={(event) => {
+                  setField(field.name, event.target.value);
+                  touchField(field.name);
+                }}
                 onBlur={() => touchField(field.name)}
               />
               {showError ? (

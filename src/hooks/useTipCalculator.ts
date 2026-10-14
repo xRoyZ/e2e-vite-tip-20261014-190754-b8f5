@@ -1,5 +1,12 @@
 import { useState } from 'react';
-import type { FieldErrors, FieldName, TipInput, TipResult } from '../lib/tip';
+import {
+  calculateTip,
+  validateInput,
+  type FieldErrors,
+  type FieldName,
+  type TipInput,
+  type TipResult,
+} from '../lib/tip';
 
 export function useTipCalculator(): {
   input: TipInput;
@@ -20,8 +27,8 @@ export function useTipCalculator(): {
     persons: false,
   });
 
-  const errors: FieldErrors = {};
-  const result: TipResult | null = null;
+  const errors: FieldErrors = validateInput(input);
+  const result: TipResult | null = calculateTip(input);
 
   function setField(field: FieldName, value: string): void {
     setInput((previous) => ({ ...previous, [field]: value }));
